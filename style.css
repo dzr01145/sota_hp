@@ -328,9 +328,13 @@ ul {
 .card {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    padding: 2.5rem;
     border-radius: 8px;
     transition: transform 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+    text-decoration: none;
 }
 
 .card:hover {
@@ -338,53 +342,106 @@ ul {
     border-color: var(--accent-color);
 }
 
+.card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-image img {
+    transform: scale(1.1);
+}
+
+.card-content {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 .card h3 {
     font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     color: var(--accent-color);
 }
 
-.card ul li {
-    margin-bottom: 0.8rem;
-    padding-left: 1.2rem;
-    position: relative;
+.card p {
     color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    flex: 1;
 }
 
-.card ul li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
+.read-more {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: auto;
+    display: inline-block;
+    transition: color 0.3s;
+}
+
+.card:hover .read-more {
     color: var(--accent-color);
 }
 
 /* Philosophy */
 .philosophy-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 3rem;
     margin-top: 3rem;
 }
 
 .philosophy-item {
-    text-align: center;
-    padding: 2rem;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+    text-align: left;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+    display: block;
+    text-decoration: none;
+}
+
+.philosophy-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+
+.philosophy-item .card-image {
+    height: 180px;
+}
+
+.philosophy-item .card-content {
+    padding: 2rem;
+    position: relative;
 }
 
 .philosophy-item .number {
-    display: block;
+    position: absolute;
+    top: -1.5rem;
+    right: 1.5rem;
     font-size: 4rem;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.05);
-    margin-bottom: -1.5rem;
     font-family: var(--font-heading);
+    line-height: 1;
 }
 
 .philosophy-item h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    color: #fff;
 }
 
 .philosophy-item p {
@@ -400,12 +457,42 @@ ul {
 
 .activity-item {
     background: var(--glass-bg);
-    padding: 2rem;
-    border-left: 3px solid var(--accent-color);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.3s, background-color 0.3s;
+    overflow: hidden;
+}
+
+.activity-item:hover {
+    transform: translateX(10px);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.card-image-small {
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+}
+
+.card-image-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.activity-content {
+    padding: 1.5rem 2rem;
+    flex: 1;
 }
 
 .activity-item h3 {
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
+    color: #fff;
 }
 
 .activity-item p {
@@ -494,199 +581,196 @@ ul {
     }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 3rem;
-    }
-
-    .split-layout,
-    .split-layout.reverse {
-        flex-direction: column;
-        gap: 2rem;
-    }
-
-    .nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: var(--bg-color);
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        transform: translateY(-100%);
-        transition: transform 0.4s ease-in-out;
-        z-index: 99;
-    }
-
-    .nav.active {
-        transform: translateY(0);
-        display: flex;
-    }
-
-    .nav a {
-        font-size: 1.5rem;
-        margin: 1rem 0;
-    }
-
+/* Detail Pages */
+.page-header {
+    padding: 12rem 0 6rem;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(10, 10, 10, 0.7), var(--bg-color)), url('assets/hero_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
-.card h3 {
+.page-title {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.page-subtitle {
     font-size: 1.5rem;
-    margin-bottom: 1.5rem;
     color: var(--accent-color);
+    font-weight: 500;
 }
 
-.card ul li {
-    margin-bottom: 0.8rem;
-    padding-left: 1.2rem;
+.detail-content {
+    padding-top: 4rem;
+}
+
+.detail-block {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    margin-bottom: 8rem;
+}
+
+.detail-block:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.detail-image {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.detail-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.detail-text {
+    flex: 1;
+}
+
+.detail-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 1rem;
+    display: inline-block;
+}
+
+.detail-text h3 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.detail-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+}
+
+.lead-text {
+    font-size: 1.5rem !important;
+    line-height: 1.6;
+    color: #fff !important;
+}
+
+/* Specific Detail Lists */
+.qualification-list,
+.project-list,
+.writing-examples {
+    list-style: none;
+}
+
+.qualification-list li,
+.project-item {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+}
+
+.qualification-list li strong {
+    display: block;
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.writing-examples li {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
     position: relative;
     color: var(--text-muted);
 }
 
-.card ul li::before {
-    content: '•';
+.writing-examples li::before {
+    content: '→';
     position: absolute;
     left: 0;
     color: var(--accent-color);
 }
 
-/* Philosophy */
-.philosophy-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem;
-    margin-top: 3rem;
-}
-
-.philosophy-item {
-    text-align: center;
-    padding: 2rem;
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
-    border-radius: 8px;
-}
-
-.philosophy-item .number {
-    display: block;
-    font-size: 4rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.05);
-    margin-bottom: -1.5rem;
-    font-family: var(--font-heading);
-}
-
-.philosophy-item h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.philosophy-item p {
-    color: var(--text-muted);
-}
-
-/* Activity List */
-.activity-list {
+/* Philosophy Detail */
+.philosophy-detail-grid {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 6rem;
+    margin-top: 4rem;
 }
 
-.activity-item {
-    background: var(--glass-bg);
-    padding: 2rem;
-    border-left: 3px solid var(--accent-color);
+.philosophy-detail-item {
+    position: relative;
+    padding-left: 2rem;
+    border-left: 2px solid var(--glass-border);
 }
 
-.activity-item h3 {
-    margin-bottom: 0.5rem;
+.number-large {
+    font-size: 8rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.03);
+    position: absolute;
+    top: -4rem;
+    left: 0;
+    line-height: 1;
+    z-index: -1;
 }
 
-.activity-item p {
+.logic-steps {
+    margin: 2rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent-color);
+}
+
+.logic-steps li {
+    margin-bottom: 1rem;
     color: var(--text-muted);
 }
 
-/* Contact */
-.contact {
-    text-align: center;
+.logic-steps strong {
+    color: #fff;
 }
 
-.btn {
-    display: inline-block;
-    margin-top: 2rem;
-    padding: 1rem 3rem;
-    background: transparent;
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-    font-family: var(--font-heading);
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+/* Activity Detail */
+.activity-detail-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-top: 4rem;
+}
+
+.activity-detail-item {
+    background: var(--glass-bg);
+    padding: 2.5rem;
+    border-radius: 8px;
+    border-top: 3px solid var(--accent-color);
+}
+
+.back-link {
+    text-align: center;
+    margin: 6rem 0 2rem;
+}
+
+.btn-text {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
     transition: all 0.3s;
 }
 
-.btn:hover {
-    background: var(--accent-color);
-    color: #000;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-}
-
-/* Footer */
-.footer {
-    padding: 2rem 0;
-    text-align: center;
-    border-top: 1px solid var(--glass-border);
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
-
-/* Animations */
-.reveal-text {
-    display: block;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.8s forwards;
-}
-
-.reveal-text:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.reveal-text-delay {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.8s forwards 0.5s;
-}
-
-.fade-in-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.fade-in-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.delay-100 {
-    transition-delay: 0.1s;
-}
-
-.delay-200 {
-    transition-delay: 0.2s;
-}
-
-.delay-300 {
-    transition-delay: 0.3s;
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.btn-text:hover {
+    color: var(--accent-color);
+    border-bottom-color: var(--accent-color);
 }
 
 /* Responsive */
@@ -743,5 +827,30 @@ ul {
 
     .header {
         padding: 1.5rem;
+    }
+
+    .detail-block,
+    .detail-block:nth-child(even) {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .card-image-small {
+        width: 100px;
+        height: 100px;
+    }
+
+    .activity-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .card-image-small {
+        width: 100%;
+        height: 200px;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
     }
 }
